@@ -1,13 +1,13 @@
 {
   "name": "amcharts-nested-labels",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Library to add nested labels to amcharts axes",
   "main": "lib/es5/index.js",
   "module": "lib/es6/index.js",
   "sideEffects": false,
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/adarshlilha/amcharts-nested-labels"
   },
   "keywords": [
     "javascript",
@@ -20,5 +20,8 @@
   ],
   "author": "Adarsh Lilha <adarshlilha@gmail.com>",
   "license": "MIT",
-  "homepage": ""
+  "bugs": {
+    "url": "https://github.com/adarshlilha/amcharts-nested-labels/issues"
+  },
+  "homepage": "https://github.com/adarshlilha/amcharts-nested-labels#readme"
 }
