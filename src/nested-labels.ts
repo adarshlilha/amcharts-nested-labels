@@ -8,12 +8,12 @@ function createRange({
   label,
   isGrandParent = false,
 }) {
-  const rangeDataItem = xAxisRef.current.makeDataItem({
+  const rangeDataItem = xAxisRef.makeDataItem({
     category: start,
     endCategory: end,
   });
 
-  const range = xAxisRef.current.createAxisRange(rangeDataItem);
+  const range = xAxisRef.createAxisRange(rangeDataItem);
 
   const labelConfig: NestedLabel = {
     dy: isGrandParent ? 80 : 35,
@@ -23,15 +23,15 @@ function createRange({
     textAlign: "left",
   };
 
-  const categoryWidth = xAxisRef.current.getDataItemCoordinateX(
+  const categoryWidth = xAxisRef.getDataItemCoordinateX(
     rangeDataItem,
     "category"
   );
-  const endCategoryWidth = xAxisRef.current.getDataItemCoordinateX(
+  const endCategoryWidth = xAxisRef.getDataItemCoordinateX(
     rangeDataItem,
     "endCategory"
   );
-  const barWidth = seriesRef.current.columns.values[0]?.width();
+  const barWidth = seriesRef.columns.values[0]?.width();
   let labelWidth = endCategoryWidth - categoryWidth + 70;
 
   if (barWidth > labelWidth) labelWidth = barWidth;
