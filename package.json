@@ -1,0 +1,17 @@
+{
+  "name": "amcharts-nested-labels",
+  "version": "0.1.0",
+  "description": "Library to add nested labels to amcharts axes",
+  "scripts": {
+    "compile": "rm -rf dist/lib && tsc && tsc --build tsconfig.es5.json"
+  },
+  "author": "Adarsh Lilha <adarshlilha@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@amcharts/amcharts5": "^5.9.7",
+    "typescript": "^5.4.5"
+  },
+  "peerDependencies": {
+    "@amcharts/amcharts5": "^5.9.7"
+  }
+}
