@@ -1,6 +1,6 @@
 {
   "name": "amcharts-nested-labels",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Library to add nested labels to amcharts axes",
   "main": "lib/es5/index.js",
   "module": "lib/es6/index.js",
