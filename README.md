@@ -5,6 +5,8 @@
 
 Wrapper library to add nested labels to amcharts5 axes
 
+[NPM lib](https://www.npmjs.com/package/amcharts-nested-labels)
+
 ### Non-overflowing text
 
 ![normal label](https://github-production-user-asset-6210df.s3.amazonaws.com/13575704/336601510-4a6137bb-3f05-4ab8-8ed3-7ff64e5ff594.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20240604%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240604T204135Z&X-Amz-Expires=300&X-Amz-Signature=c708ce8087ea04bbce8c38f84742ca932b67523b9ddcccb03a863dabfa3b8f47&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=0)
