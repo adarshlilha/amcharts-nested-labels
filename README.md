@@ -64,4 +64,4 @@ found a nifty answer to create nested labels using range and this library is pro
 
 found the lib useful?
 
-please create an [issue](https://github.com/adarshlilha/amcharts-nested-labels/issues) to get discussion started on any open bugs/feature requests
+please create an [issue](https://github.com/adarshlilha/amcharts-nested-labels/issues) to get the discussion started on any open bugs/feature requests
