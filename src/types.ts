@@ -1,10 +1,9 @@
 export interface LabelProps {
-  xAxisRef: any;
-  seriesRef: any;
+  xAxis: any;
+  series: any;
   startEndLabels: string[];
-  rangeLabel: string;
-  rangeArr: any;
-  isGrandParent: boolean;
+  label: string;
+  dy?: number | ((delta: number) => number);
 }
 
 export interface NestedLabel {
@@ -14,4 +13,19 @@ export interface NestedLabel {
   fontSize?: number;
   textAlign: string;
   html?: string;
+}
+
+export interface GetLabelWidthType {
+  xAxis: any;
+  series: any;
+  dataItem: any;
+}
+
+export interface RangeType {
+  xAxis: any;
+  series: any;
+  start: string;
+  end: string;
+  label: string;
+  dy?: number | ((delta: number) => number);
 }

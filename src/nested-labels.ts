@@ -1,74 +1,67 @@
-import { LabelProps, NestedLabel } from "./types";
+import { GetLabelWidthType, LabelProps, NestedLabel, RangeType } from "./types";
 
-function createRange({
-  xAxisRef,
-  seriesRef,
-  start,
-  end,
-  label,
-  isGrandParent = false,
-}) {
-  const rangeDataItem = xAxisRef.makeDataItem({
+const VERTICAL_LABEL_DELTA = 35;
+
+// calculate width of new label
+function getLabelWidth({ xAxis, series, dataItem }: GetLabelWidthType): number {
+  const categoryWidth = xAxis.getDataItemCoordinateX(dataItem, "category");
+  const endCategoryWidth = xAxis.getDataItemCoordinateX(
+    dataItem,
+    "endCategory"
+  );
+  const barWidth = series.columns.values[0]?.width();
+  let labelWidth = endCategoryWidth - categoryWidth + 70;
+
+  if (barWidth > labelWidth) labelWidth = barWidth;
+  return labelWidth;
+}
+
+function createRange({ xAxis, series, start, end, label, dy }: RangeType) {
+  const dataItem = xAxis.makeDataItem({
     category: start,
     endCategory: end,
   });
-
-  const range = xAxisRef.createAxisRange(rangeDataItem);
+  const labelWidth = getLabelWidth({ xAxis, series, dataItem });
+  const yDelta = typeof dy === "function" ? dy(VERTICAL_LABEL_DELTA) : dy;
 
   const labelConfig: NestedLabel = {
-    dy: isGrandParent ? 80 : 35,
+    dy: yDelta || VERTICAL_LABEL_DELTA,
     oversizedBehavior: "trucate",
     fontWeight: "400",
     fontSize: 14,
     textAlign: "left",
+    html: `
+          <div style="width: ${labelWidth}px; display: flex; position: relative; padding: 10px 0">
+            <span style="left: -1px; position: absolute; top: -7px; color: #BABBBE">|</span>
+            <p style="display: inline-block;margin-top: 0;border-top: 1px solid #BABBBE;width: 100%;text-align: center;color: #515357;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">${label}</p>
+            <span style="right: -1px; position: absolute; top: -7px; color: #BABBBE">|</span>
+          </div>`,
   };
 
-  const categoryWidth = xAxisRef.getDataItemCoordinateX(
-    rangeDataItem,
-    "category"
-  );
-  const endCategoryWidth = xAxisRef.getDataItemCoordinateX(
-    rangeDataItem,
-    "endCategory"
-  );
-  const barWidth = seriesRef.columns.values[0]?.width();
-  let labelWidth = endCategoryWidth - categoryWidth + 70;
-
-  if (barWidth > labelWidth) labelWidth = barWidth;
-
+  const range = xAxis.createAxisRange(dataItem);
   range.get("label").setAll({
     text: "",
   });
+  dataItem.get("label").setAll(labelConfig);
 
-  labelConfig.html = `
-        <div style="width: ${labelWidth}px; display: flex; position: relative; padding: 10px 0">
-          <span style="left: -1px; position: absolute; top: -4px; color: #BABBBE">|</span>
-          <p style="display: inline-block;margin-top: 0;border-top: 1px solid #BABBBE;width: 100%;text-align: center;color: #515357;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">${label}</p>
-          <span style="right: -1px; position: absolute; top: -4px; color: #BABBBE">|</span>
-        </div>`;
-  rangeDataItem.get("label").setAll(labelConfig);
   return range;
 }
 
 export function createLabel({
-  xAxisRef,
-  seriesRef,
+  xAxis,
+  series,
   startEndLabels,
-  rangeLabel,
-  rangeArr = [],
-  isGrandParent = false,
+  label,
+  dy,
 }: LabelProps) {
-  setTimeout(() => {
-    const rangeElem = createRange({
-      xAxisRef,
-      seriesRef,
+  return setTimeout(() => {
+    createRange({
+      xAxis: xAxis.current ? xAxis.current : xAxis,
+      series: series.current ? series.current : series,
       start: startEndLabels[0],
       end: startEndLabels[startEndLabels.length - 1],
-      label: rangeLabel,
-      isGrandParent,
+      label,
+      dy,
     });
-    if (rangeElem) {
-      rangeArr.push(rangeElem);
-    }
   }, 1000);
 }
